@@ -31,4 +31,10 @@ public class Article {
 		this.title = title;
 		this.content = content;
 	}
+	
+	// 게시글 제목과 내용을 수정
+	public void update(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
 }

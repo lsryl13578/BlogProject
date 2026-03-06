@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mysite.blog.domain.Article;
 import com.mysite.blog.dto.AddArticleRequest;
 import com.mysite.blog.dto.ArticleResponse;
+import com.mysite.blog.dto.UpdateArticleRequest;
 import com.mysite.blog.service.BlogService;
 
 import lombok.RequiredArgsConstructor;
@@ -69,5 +71,14 @@ public class BlogApiController {
 		
 		return ResponseEntity.ok()
 				.build();
+	}
+	
+	// 특정 게시글을 수정하는 PUT API 요청을 처리
+	@PutMapping("/api/articles/{id}")
+	public ResponseEntity<Article> updateArticle(@PathVariable("id") long id, @RequestBody UpdateArticleRequest request) {
+		Article updatedArticle = blogService.update(id, request);
+		
+		return ResponseEntity.ok()
+				.body(updatedArticle);
 	}
 }
