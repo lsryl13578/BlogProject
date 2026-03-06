@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +49,15 @@ public class BlogApiController {
 		// HTTP 상태 코드 200(OK)와 함께 게시글 목록을 JSON 형태로 응답
 		return ResponseEntity.ok()
 				.body(articles);
+	}
+	
+	// 특정 게시글을 조회하는 GET API 요청을 처리
+	@GetMapping("/api/articles/{id}")
+	// URL 경로에서 값 추출
+	public ResponseEntity<ArticleResponse> findArticle(@PathVariable("id") long id) {
+		Article article = blogService.findById(id);
+		
+		return ResponseEntity.ok()
+				.body(new ArticleResponse(article));
 	}
 }

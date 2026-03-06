@@ -25,4 +25,10 @@ public class BlogService {
 	public List<Article> findAll() {
 		return articleRepository.findAll();
 	}
+	
+	// 블로그 특정 글 조회 메서드
+	public Article findById(long id) {
+		return articleRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+	}
 }
