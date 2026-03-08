@@ -65,7 +65,7 @@ public class BlogApiController {
 	}
 	
 	// 특정 게시글을 삭제하는 DELETE API 요청을 처리
-	@DeleteMapping("/api/article/{id}")
+	@DeleteMapping("/api/articles/{id}")
 	public ResponseEntity<Void> deleteArticle(@PathVariable("id") long id) {
 		blogService.delete(id);
 		
